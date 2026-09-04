@@ -44,7 +44,7 @@ def random_state_n_queens(n, max_steps=100000):
     #init the board with random positions
     curr_state = random.sample(range(n), n)
     steps = 0
-    current_max_steps = max_steps
+    
 
     while (steps < max_steps):
 
@@ -69,6 +69,7 @@ def random_state_n_queens(n, max_steps=100000):
 
     print('no solution found in ', max_steps, ' steps') 
     print('final state: ', curr_state)
+    return None, steps
 
 
 def print_board(state):
