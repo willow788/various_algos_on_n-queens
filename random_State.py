@@ -45,7 +45,6 @@ def random_state_n_queens(n, max_steps=100000):
     curr_state = random.sample(range(n), n)
     steps = 0
     
-
     while (steps < max_steps):
 
         #counting the number of conflicts
