@@ -1,12 +1,4 @@
-#we want a square star pattern of 8x8
 import random
-
-def chessboard():
-    for i in range(8):
-        for j in range(8):
-            print('*' , end=" ")
-        print()
-
 
 #we will implement the trival algo first
 
