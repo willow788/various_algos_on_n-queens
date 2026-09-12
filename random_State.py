@@ -44,11 +44,19 @@ def random_state_n_queens(n, max_steps=100000):
     #init the board with random positions
     curr_state = random.sample(range(n), n)
     steps = 0
+    visited_prev = []
+    visited_prev.append(curr_state)
+    print('current state added to the database')
+
+
     
     while (steps < max_steps):
 
+
         #counting the number of conflicts
         conflicts = conflicting_queens(curr_state)
+       
+
 
         if not conflicts:
             print('the solution has been found!')
@@ -57,6 +65,8 @@ def random_state_n_queens(n, max_steps=100000):
                   )
             return curr_state, steps
         else:
+            
+            
 
             #if soln is not found then randomly generate a new state
             #and try again
