@@ -46,6 +46,7 @@ def random_state_n_queens_with_memory(n, max_steps=100000):
             print('this state has been previously generated and no soln is obtained from it')
         else:
             print('this state has not been previously generated!')
+
             database.add(curr_state)
             steps += 1
             conflict_present = conflicting_queens(curr_state)
@@ -55,8 +56,10 @@ def random_state_n_queens_with_memory(n, max_steps=100000):
                 print(f"final state obtained: {curr_state} in total steps: {steps}")
                 return curr_state, steps
             print("conflict is present thus will will be generating a new state")
+            print(f"current problematic state : {curr_state}")
+            print('-                                                           -')
             curr_state = tuple(random.sample(range(n), n))
-            steps += 1
+             
     print('no soln foound!')
     return None, steps
 
@@ -69,7 +72,7 @@ def print_board(state):
         print(' '.join(row))
 
 def main():
-   soln = random_state_n_queens_with_memory(8)
+   soln = random_state_n_queens_with_memory(5)
    
    print(soln)
    
