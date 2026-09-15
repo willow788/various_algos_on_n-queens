@@ -1,11 +1,12 @@
 #we will be combining the hill climbing algorithm with random restarts when we dont get a soln
+import random
+
 """random state hill climbing algorithm for n queens problem
 if we get a soln--- then good!
 otherwise we will generate a new random state and start the hill climbing algorithm again
 pretty simple to implement and understand
 as we know that random states algorithms are asymptotically complete and hill climbing is not, thus we will be combining the two to get a better solution"""
 
-import random
 
 def is_conflict(state_1, state_2, board):
 
