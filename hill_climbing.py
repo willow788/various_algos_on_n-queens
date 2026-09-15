@@ -124,4 +124,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    #this is just the basic hill climbing algorithm and it can be improved by using random restarts or simulated annealing to avoid local maxima and plateaus.
             
