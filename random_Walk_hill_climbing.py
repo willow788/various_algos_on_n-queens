@@ -10,6 +10,8 @@ in a few lines:
 """
 
 import random
+import time
+import matplotlib.pyplot as plt
 
 #we will be implementing this algo on a n queens problem
 
@@ -128,6 +130,7 @@ def print_board(state):
 
 
 def main():
+    """
 
     no_of_queens = int(input("Enter the number of queens: "))
 
@@ -140,7 +143,33 @@ def main():
         print("Solution found:")
         print_board(soln)
     else:
-        print("No solution found.")
+        print("No solution found.")"""
+
+
+   #we want to generate n queens soln for n = 4 to n = 20 and print the time taken to find the soln for each n
+   #and we want to plot the time taken to find the soln for each n
+
+    n = list(range(4, 21))
+    time_taken = []
+
+    for i in n:
+        start_Time = time.time()
+        soln = random_walk_combined_hill_climbing(i)
+        end_Time = time.time()
+        time_taken.append(end_Time - start_Time)
+        print(f"Time taken for {i} queens: {end_Time - start_Time:.2f} seconds")
+
+    #now plotting the time taken to find the soln for each n
+    plt.plot(n, time_taken)
+    plt.xlabel('Number of Queens')
+    plt.ylabel('Time taken (seconds)')
+    plt.title('Time taken to find solution for n-Queens problem ')
+    plt.grid()
+    plt.show()
+    plt.savefig('time_taken_random_walk_hill_climbing.png')
+
+
+
 
 if __name__ == "__main__":
     main()
