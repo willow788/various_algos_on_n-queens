@@ -56,7 +56,10 @@ def generating_neighbours(state):
 
     return neighbours
 
-def all_combined_hill_climbing(n, max_restarts = 1000):
+def all_combined_hill_climbing(n, max_restarts=1000, max_steps=None, verbose=True):
+
+    if max_steps is None:
+        max_steps = 2 * n
 
     for restart_no in range(1, max_restarts+1):
         steps = 0
@@ -68,20 +71,23 @@ def all_combined_hill_climbing(n, max_restarts = 1000):
         current_heuristic = and_my_heuristic_is(current_State)
 
         #printing the current state and its heuristic value
-        print(f"Restart {restart_no}")
-        print(f"current state : {current_State}")
-        print(f"current heuristic : {current_heuristic}")
+        if verbose:
+            print(f"Restart {restart_no}")
+            print(f"current state : {current_State}")
+            print(f"current heuristic : {current_heuristic}")
 
         while True:
             steps += 1
-            if steps > n * n:
-                print(f"step limit reached for restart {restart_no}, moving to the next restart")
+            if steps > max_steps:
+                if verbose:
+                    print(f"step limit reached for restart {restart_no}, moving to the next restart")
                 break
 
             #checking if the current state is a solution
             if current_heuristic == 0:
-                print(f"Solution found after {restart_no} restarts")
-                print(f"solution : {current_State}")
+                if verbose:
+                    print(f"Solution found after {restart_no} restarts")
+                    print(f"solution : {current_State}")
                 return current_State
 
             #else finding the neighbours of the current state
@@ -94,34 +100,41 @@ def all_combined_hill_climbing(n, max_restarts = 1000):
             best_Neighbour_Heuristic = and_my_heuristic_is(best_neighbour)
 
             if current_heuristic <= best_Neighbour_Heuristic:
-                print(f"we are stuck at a local optima!")
+                if verbose:
+                    print(f"we are stuck at a local optima!")
 
                 #now we generate a probability to either do a random walk or a restart
                 prob_To_Do_random_walk = random.randint(0, 1)
 
                 if prob_To_Do_random_walk == 1:
-                    print(f"doing a random walk!")
-                    print(f"value of prob_To_Do_random_walk : {prob_To_Do_random_walk}")
+                    if verbose:
+                        print(f"doing a random walk!")
+                        print(f"value of prob_To_Do_random_walk : {prob_To_Do_random_walk}")
 
                     #generating a random neighbour of the current state
                     random_neighbour = random.choice(neighbours)
                     current_State = random_neighbour
                     current_heuristic = and_my_heuristic_is(current_State)
-                    print(f"current state after random walk : {current_State}")
-                    print(f"current heuristic after random walk : {current_heuristic}")
+                    if verbose:
+                        print(f"current state after random walk : {current_State}")
+                        print(f"current heuristic after random walk : {current_heuristic}")
                 else:
-                    print(f"doing a random restart!")
+                    if verbose:
+                        print(f"doing a random restart!")
 
                     #generating a random state for n queens
                     random_state = random.sample(range(n), n)
                     current_State = random_state
                     current_heuristic = and_my_heuristic_is(current_State)
-                    print(f"current state after random restart : {current_State}")
-                    print(f"current heuristic after random restart : {current_heuristic}")
+                    if verbose:
+                        print(f"current state after random restart : {current_State}")
+                        print(f"current heuristic after random restart : {current_heuristic}")
                     break
 
-        print(f"no solution found in this restart, moving to next restart")
-    print(f"no solution found in any of the restarts")
+        if verbose:
+            print(f"no solution found in this restart, moving to next restart")
+    if verbose:
+        print(f"no solution found in any of the restarts")
 
     return None, max_restarts
 
@@ -133,7 +146,7 @@ def print_board(state):
         print(' '.join(row))
 
 def main():
-    n = int(input("Enter the number of queens: "))
+    """n = int(input("Enter the number of queens: "))
     if n <= 3:
         print("No solution exists for n <= 3")
         return
@@ -143,7 +156,30 @@ def main():
             print("Solution found:")
             print_board(soln)
         else:
-            print("No solution found.")
+            print("No solution found.")"""
+
+    #lets see how much time it takes to find the solution for n = 4 to n = 100
+    n = list(range(4, 20))
+    time_taken = []
+
+    for i in n:
+
+        start_time = time.time()
+        soln = all_combined_hill_climbing(i, max_restarts=100, verbose=False)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        time_taken.append(elapsed_time)
+        print(f"Time taken to find solution for n = {i} is {elapsed_time} seconds")
+
+    plt.plot(n, time_taken)
+    plt.xlabel('Number of Queens')
+    plt.ylabel('Time taken (seconds)')
+    plt.title('time taken to find solution for n- Queens problem')
+    plt.savefig('time_taken_all_combined_hill_climbing.png')
+    plt.show()
+    plt.close()
+
+
 
 if __name__ == "__main__":
     main()
