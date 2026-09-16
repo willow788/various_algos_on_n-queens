@@ -92,6 +92,8 @@ def random_walk_combined_hill_climbing(n, max_restarts = 1000):
 
             #gettinhg the heuristic value of the best neighbour
             best_neighbour_heuristic = heuristic_function(best_neighbour)
+            print(f"best neighbour : {best_neighbour}")
+            print(f"best neighbour heuristic : {best_neighbour_heuristic}")
 
             #if we encounter a local optima
             if best_neighbour_heuristic >= current_heuristic:
