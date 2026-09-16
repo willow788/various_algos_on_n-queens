@@ -165,8 +165,10 @@ def main():
     plt.ylabel('Time taken (seconds)')
     plt.title('Time taken to find solution for n-Queens problem ')
     plt.grid()
-    plt.show()
+    plt.tight_layout()
     plt.savefig('time_taken_random_walk_hill_climbing.png')
+    plt.show()
+    plt.close()
 
 
 
