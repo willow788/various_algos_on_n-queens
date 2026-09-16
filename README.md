@@ -17,7 +17,7 @@ N-Queens is a classic constraint-satisfaction problem usually taught alongside b
 | `iterative_depth_random_walk.py` | Random walk bounded by an iterative depth/step limit |
 | `random_State.py` / `random_State_mod.py` | Helpers for generating (and modifying) random board states |
 
-> *(Fill in / correct any of the above if a description doesn't match what the algorithm actually does — written from file names and standard usage of these terms.)*
+
 
 ## Results
 
