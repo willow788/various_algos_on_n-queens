@@ -15,6 +15,7 @@ def is_conflict(state_1, state_2, board):
     col_1 = board[state_1]
     col_2 = board[state_2]
 
+
     #conflict conditions
     #the second condition is never true by the way -- because of the way we are sampling
 
