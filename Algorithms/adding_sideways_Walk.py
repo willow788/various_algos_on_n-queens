@@ -140,12 +140,29 @@ def main():
         else:
             print(f"For n = {n}, no solution found within {restarts_used} restarts.")
 
-    plt.plot(n_values, restart_counts, marker='o')
-    plt.title('Number of restarts needed as n changes')
-    plt.xlabel('Number of Queens')
-    plt.ylabel('Restarts required')
-    plt.grid(True)
-    plt.savefig('restarts_vs_n_sideways_hill_climbing.png')
+    plt.figure(figsize=(14, 6))
+    plt.style.use('seaborn-v0_8-whitegrid')
+
+    plt.subplot(1, 2, 1)
+    plt.plot(n_values, restart_counts, marker='o', markersize=6, linewidth=2.5,
+             color='#1f77b4', label='Restarts')
+    plt.title('Restarts vs. Number of Queens', fontsize=12, fontweight='bold')
+    plt.xlabel('Number of Queens', fontsize=11)
+    plt.ylabel('Restarts required', fontsize=11)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(n_values, time_taken, marker='s', markersize=6, linewidth=2.5,
+             color='#ff7f0e', label='Time')
+    plt.title('Time vs. Number of Queens', fontsize=12, fontweight='bold')
+    plt.xlabel('Number of Queens', fontsize=11)
+    plt.ylabel('Time (seconds)', fontsize=11)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend()
+
+    plt.tight_layout()
+    plt.savefig('restarts_and_time_vs_n_sideways_hill_climbing.png', dpi=300, bbox_inches='tight')
     plt.show()
     plt.close()
 
