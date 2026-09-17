@@ -79,7 +79,7 @@ def hill_climbing_with_sidewise_walk_added(n, max_restarts=10000, max_steps=1000
                 print("the current state is the solution!")
                 print(f"current solution : {current_State}")
                 print(f"current state's heuristic value: {current_State_heuristic} with {restart_number} restarts")
-                return current_State
+                return current_State, restart_number
 
             neighbours = generating_neighbours(current_State)
             best_neigbour = min(neighbours, key=heuristic_function)
@@ -113,7 +113,7 @@ def hill_climbing_with_sidewise_walk_added(n, max_restarts=10000, max_steps=1000
         print('NO SOLUTION FOUND IN THIS RESTART.. MOVING TO THE NEXT ONE!')
 
     print("No solution found from any of the restarts we will be returning None")
-    return None, restart_number
+    return None, max_restarts
 
 def print_board(state):
     n = len(state)
@@ -123,28 +123,29 @@ def print_board(state):
         print(' '.join(row))
 
 def main():
-    
-
-    n = list(range(4, 20))
+    n_values = list(range(4, 20))
+    restart_counts = []
     time_taken = []
-    
-    for i in n:
-    
+
+    for n in n_values:
         start_time = time.time()
-        soln = hill_climbing_with_sidewise_walk_added(i)
-        
+        soln, restarts_used = hill_climbing_with_sidewise_walk_added(n, max_restarts=200)
         end_time = time.time()
-        elapsed_time = end_time - start_time
-        time_taken.append(elapsed_time)
-        print(f"Time taken to find solution for n = {i} is {elapsed_time} seconds")
-    
-    plt.plot(n, time_taken)
-    plt.title('Time taken to find solution for n-Queens problem')
+
+        time_taken.append(end_time - start_time)
+        restart_counts.append(restarts_used)
+
+        if soln is not None:
+            print(f"For n = {n}, solution found after {restarts_used} restarts.")
+        else:
+            print(f"For n = {n}, no solution found within {restarts_used} restarts.")
+
+    plt.plot(n_values, restart_counts, marker='o')
+    plt.title('Number of restarts needed as n changes')
     plt.xlabel('Number of Queens')
-    plt.ylabel('Time taken (seconds)')
+    plt.ylabel('Restarts required')
     plt.grid(True)
-    plt.title('time taken to find solution for n- Queens problem')
-    plt.savefig('time_taken_sideways_hill_climbing.png')
+    plt.savefig('restarts_vs_n_sideways_hill_climbing.png')
     plt.show()
     plt.close()
 
