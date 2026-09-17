@@ -113,7 +113,7 @@ def hill_climbing_with_sidewise_walk_added(n, max_restarts=10000, max_steps=1000
         print('NO SOLUTION FOUND IN THIS RESTART.. MOVING TO THE NEXT ONE!')
 
     print("No solution found from any of the restarts we will be returning None")
-    return None
+    return None, restart_number
 
 def print_board(state):
     n = len(state)
@@ -132,6 +132,7 @@ def main():
     
         start_time = time.time()
         soln = hill_climbing_with_sidewise_walk_added(i)
+        
         end_time = time.time()
         elapsed_time = end_time - start_time
         time_taken.append(elapsed_time)
