@@ -15,15 +15,7 @@ N-Queens is a classic constraint-satisfaction problem usually taught alongside b
 | `random_Walk_hill_climbing.py` | Hybrid: random walk combined with hill climbing (e.g. random moves with a chance of a greedy step) |
 | `random_state_hill_climbing.py` | Random-restart hill climbing — reruns hill climbing from fresh random states to escape local optima |
 | `iterative_depth_random_walk.py` | Random walk bounded by an iterative depth/step limit |
-| `random_State.py` / `random_State_mod.py` | Helpers for generating (and modifying) random board states |
-
-
-
-## Results
-
-`time_taken_random_walk_hill_climbing.png` benchmarks time-to-solution across the implemented methods.
-
-**TODO:** add 2–3 sentences here on what the benchmark shows — which method converges fastest, how performance changes as N grows, and any surprising failure cases (e.g. does plain random walk ever get stuck / time out?).
+| `random_State.py` / `random_State_mod.py` | Helpers for generating (and modifying) random states 
 
 ## Getting started
 
