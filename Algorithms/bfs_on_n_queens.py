@@ -6,6 +6,7 @@ import queue
 import random
 import time
 from collections import deque
+import matplotlib.pyplot as plt
 
 # Define a function to check if a position is valid
 def is_valid(board, row, col):
@@ -99,7 +100,7 @@ def print_board(state):
 
 #defining the main function to run the bfs on n queens problem
 def main():
-
+    """
     n = int(input("enter the value of n: "))
 
     if n <= 3:
@@ -113,6 +114,36 @@ def main():
             print_board(soln)
         else:
             print(f"no solution found for n = {n}")
+    """
+
+    #NOW WE WILL OBSERVE THE BEHAVIOR
+    i = list(range(4, 15))
+    time_taken_values = []
+
+    #we will see how long it takes to find a solution for different values of n
+    for n in i:
+
+        starting_time = time.time()
+
+        #find a solution for n queens problem using bfs
+        soln = bfs_n_queens(n)
+
+        ending_time = time.time()
+
+        time_taken = ending_time - starting_time
+        time_taken_values.append(time_taken)
+        print(f"Time taken for n = {n}: {time_taken:.2f} seconds")
+
+    # Plot the time taken to find a solution for each value of n.
+    plt.plot(i, time_taken_values, marker='o', label='Time taken')
+    plt.xlabel('Number of queens (n)')
+    plt.ylabel('time taken (seconds)')
+    plt.title('BFS on N-Queens')
+    plt.grid()
+    plt.legend()
+    plt.show()
+        
+
 
 
 if __name__ == "__main__":
