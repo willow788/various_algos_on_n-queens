@@ -148,6 +148,8 @@ def main():
     plt.legend()
     plt.savefig('bfs_on_n_queens.png')  # Save the plot as a PNG file
     plt.show()
+
+        #damn that graph looks like my love life.. nothing then all messed up and all love appear at once lol
         
 
 
