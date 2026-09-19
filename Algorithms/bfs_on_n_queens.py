@@ -117,7 +117,7 @@ def main():
     """
 
     #NOW WE WILL OBSERVE THE BEHAVIOR
-    i = list(range(4, 15))
+    i = list(range(4, 12))
     time_taken_values = []
 
     #we will see how long it takes to find a solution for different values of n
@@ -134,13 +134,19 @@ def main():
         time_taken_values.append(time_taken)
         print(f"Time taken for n = {n}: {time_taken:.2f} seconds")
 
+    print('i tried to do it on 15 o 14 queens but it took too long so i stopped it.. i have ran out of patience !')
+    avg_time = sum(time_taken_values) / len(time_taken_values)
+    print(f"Average time taken for n = 4 to 11: {avg_time:.2f} seconds")
+
     # Plot the time taken to find a solution for each value of n.
     plt.plot(i, time_taken_values, marker='o', label='Time taken')
     plt.xlabel('Number of queens (n)')
     plt.ylabel('time taken (seconds)')
     plt.title('BFS on N-Queens')
+    
     plt.grid()
     plt.legend()
+    plt.savefig('bfs_on_n_queens.png')  # Save the plot as a PNG file
     plt.show()
         
 
